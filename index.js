@@ -256,7 +256,7 @@ if (senderNumber.includes("94760743488") && !isReact) {
 // Auto React for all messages (public and owner)
 if (!isReact && config.AUTO_REACT === 'true') {
     const reactions = [
-        '📍', '❤️'];
+        '📍'];
 
     const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
     m.react(randomReaction);
