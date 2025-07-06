@@ -39,7 +39,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ session: sessionId })
+          body: JSON.stringify({ session: encodeURIComponent(sessionId) }) // ✅ encodeURIComponent FIX
         });
 
         const text = await res.text();
