@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Connect Bot</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 100px;
+    }
+    input, button {
+      padding: 10px;
+      width: 300px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🟢 Connect Your WhatsApp Bot</h2>
+  <input type="text" id="session" placeholder="Enter Session ID">
+  <button onclick="connect()">Connect</button>
+  <p id="result"></p>
+
+  <script>
+    async function connect() {
+      const sessionId = document.getElementById("session").value;
+      const result = document.getElementById("result");
+
+      if (!sessionId) {
+        result.innerText = "❌ Please enter session ID";
+        return;
+      }
+
+      try {
+        const res = await fetch("https://botpenal.herokuapp.com/pair", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ session: sessionId })
+        });
+
+        const text = await res.text();
+        result.innerText = res.ok ? "✅ Bot Connected" : `❌ Failed: ${text}`;
+      } catch (e) {
+        result.innerText = "❌ Error: " + e.message;
+      }
+    }
+  </script>
+</body>
+</html>
